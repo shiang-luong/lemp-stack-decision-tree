@@ -44,14 +44,14 @@ You can use the following command to enter a container:
 Where `{CONTAINER_NAME}` is one of:
 
 `docker exec -ti {CONTAINER_NAME} /bin/bash`
-
-## If needed, make sure you clear out the volumes.
-
-docker-compose down -v
-
-## TODO:
-I will added the file to run on kubernentes as well.
-
 * `{APP_NAME}-php`
 * `{APP_NAME}-nginx`
 * `{APP_NAME}-mariadb`
+  
+## If needed, make sure you clear out the volumes.
+
+`docker-compose down -v`
+
+## TODO:
+I will added the file to run on kubernentes as well.
+Possibly update PHP version.
