@@ -27,11 +27,11 @@ To use it, simply follow the following steps:
 
 ##### Clone this repository.
 
-Clone this repository.
+`gh repo clone shiang-luong/lemp-stack-decision-tree`
 
 ##### Pull the submodule as well.
 
-git submodule update --init
+`git submodule update --init`
 
 ##### Start the server.
 
