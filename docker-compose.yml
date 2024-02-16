@@ -1,15 +1,21 @@
 version: '3'
 services:
     php:
-        # image: 'php:7.2-fpm'
+        #image: 'php:7.2-fpm'
         build:
             context: ./docker
             dockerfile: php.Dockerfile
         container_name: ${APP_NAME:?err}-php
         volumes:
-            - './app:/var/www/html'
+            - './app/interactive-decision-tree:/var/www/html'
+            #- './app:/var/www/html'
         depends_on:
             - mariadb
+        environment:
+            - PHP_DBHOST=mariadb
+            - PHP_DBUSERNAME=root
+            - PHP_DBPASSWD=${MYSQL_ROOT_PASSWORD:?err}
+            - PHP_DATABASE_NAME=inter-tree
 
     nginx:
         image: nginx:latest
@@ -20,14 +26,36 @@ services:
         links:
             - 'php'
         volumes:
-            - './app:/var/www/html'
+            #- './app:/var/www/html'
             - './config/nginx:/etc/nginx/conf.d'
+            - './app/interactive-decision-tree:/var/www/html'
+        environment:
+            - PHP_DBHOST=mariadb
+            - PHP_DBUSERNAME=root
+            - PHP_DBPASSWD=${MYSQL_ROOT_PASSWORD:?err}
+            - PHP_DATABASE_NAME=inter-tree
+
+    nginxsetup:
+        image: nginx:latest
+        depends_on:
+            - nginx
+        restart: "no"
+        entrypoint: [ "bash", "-c", "chmod 777 /var/www/html/xml"]      
+
 
     mariadb:
-        image: mariadb:10.3.9
+        image: mariadb:10.4.32
         container_name: ${APP_NAME:?err}-mariadb
         restart: 'on-failure'
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?err}
         volumes:
             - ${PWD}
+            - ./app/interactive-decision-tree/schema.sql:/docker-entrypoint-initdb.d/setup.sql
+
+    mariadbsetup:
+        image: mariadb:10.4.32
+        depends_on:
+            - mariadb
+        restart: "no"
+        entrypoint: [ "bash", "-c", "mysql -u root -p $MYSQL_ROOT_PASSWORD < /docker-entrypoint-initdb.d/setup.sql"]      

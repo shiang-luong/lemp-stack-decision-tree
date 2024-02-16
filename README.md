@@ -1,14 +1,14 @@
-# Docker Compose LEMP Stack
+# Docker Compose LEMP Stack and PHP Decision tree
 
-This repository contains a little `docker-compose` configuration to start a `LEMP (Linux, Nginx, MariaDB, PHP)` stack.
+This repository contains a little `docker-compose` configuration to start a `LEMP (Linux, Nginx, MariaDB, PHP)` stack (copied form https://github.com/stevenliebregt/docker-compose-lemp-stack.git ) and the PHP Decision tree from (https://github.com/judsonmitchell/interactive-decision-tree);
 
 ## Details
 
 The following versions are used.
 
 * PHP 7.2 (FPM) - With MySQLi driver optionally (Uncomment line from php.Dockerfile)
-* Nginx 1.13.6
-* MariaDB 10.3.9
+* Nginx latest
+* MariaDB 10.4.32
 
 ## Configuration
 
@@ -27,11 +27,11 @@ To use it, simply follow the following steps:
 
 ##### Clone this repository.
 
-Clone this repository with the following command: `git clone https://github.com/stevenliebregt/docker-compose-lemp-stack.git`.
+Clone this repository.
 
 ##### Start the server.
 
-Start the server using the following command inside the directory you just cloned: `docker-compose up`.
+Start the server using the following command inside the directory you just cloned: `docker-compose up --build`.
 
 ## Entering the containers
 

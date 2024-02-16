@@ -1,0 +1,3 @@
+[submodule "app/interactive-decision-tree"]
+	path = app/interactive-decision-tree
+	url = https://github.com/shiang-luong/interactive-decision-tree
