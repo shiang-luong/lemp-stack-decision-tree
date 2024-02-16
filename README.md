@@ -29,6 +29,10 @@ To use it, simply follow the following steps:
 
 Clone this repository.
 
+##### Pull the submodule as well.
+
+git submodule update --init
+
 ##### Start the server.
 
 Start the server using the following command inside the directory you just cloned: `docker-compose up --build`.
@@ -40,6 +44,13 @@ You can use the following command to enter a container:
 Where `{CONTAINER_NAME}` is one of:
 
 `docker exec -ti {CONTAINER_NAME} /bin/bash`
+
+## If needed, make sure you clear out the volumes.
+
+docker-compose down -v
+
+## TODO:
+I will added the file to run on kubernentes as well.
 
 * `{APP_NAME}-php`
 * `{APP_NAME}-nginx`
